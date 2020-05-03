@@ -31,4 +31,15 @@ public class ProjectService {
         }
 
     }
+
+    public Project finyProjectByIdentifier(String projectIdentifier) {
+        Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
+
+        // Sjekke om prosjektet ble funnet - Det kastes ikke exception - må ta hånd om det selv
+        if (project == null) {
+            throw new ProjectIdentifierException("No project with Projectidentifier like '" + projectIdentifier +"' was found");
+        }
+
+        return project;
+    }
 }
